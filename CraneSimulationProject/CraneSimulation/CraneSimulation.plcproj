@@ -26,9 +26,6 @@
     <Compile Include="DUTs\ST_CraneKinematics.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\ST_Parameters.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DUTs\ST_PistonOutOfBounds.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -78,6 +75,9 @@
     <Compile Include="POUs\Functions\F_BoomAngle.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Functions\F_CheckPistonPosition.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Functions\F_LminToSI.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -85,9 +85,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Functions\F_RadToDeg.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Functions\F_CheckPistonPosition.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -104,8 +101,9 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
-    <Folder Include="POUs\Functions" />
+    <Folder Include="CraneControl" />
     <Folder Include="POUs\Function blocks" />
+    <Folder Include="POUs\Functions" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
