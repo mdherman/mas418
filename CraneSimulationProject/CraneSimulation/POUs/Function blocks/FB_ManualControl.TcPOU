@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_ManualControl" Id="{ca9c3dcf-0c0f-42e0-a37d-836583731b5d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ManualControl
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	fVelocityFeedForwardControlOutput : LREAL;
+END_VAR
+VAR
+	fNormalizedJoystickY : LREAL;
+	fbOpenLoopControl : FB_OpenLoopControl; 
+	bEnable : BOOL := TRUE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Parameters.eErrorModes OF
+	E_ErrorModes.MaxLimit:
+		IF Inputs.fJoystickY > 0.0 THEN
+			Inputs.fJoystickY := 0.0;
+		END_IF
+	E_ErrorModes.MinLimit:
+		IF Inputs.fJoystickY < 0.0 THEN
+			Inputs.fJoystickY := 0.0;
+		END_IF
+END_CASE 
+
+fNormalizedJoystickY := Inputs.fJoystickY*Parameters.stCraneParameters.fMaxVelocityLimit;
+
+fbOpenLoopControl(
+	bEnable := bEnable,
+	stParam := Parameters.stCraneParameters,
+	fInput_ms := fNormalizedJoystickY,
+	fMaxValveFlow_lmin := Parameters.stCraneParameters.fMaxFlowCapacity,
+	fNormalizedOutput => Outputs.fOutputVelocity
+);
+
+HMI.fCylinderPositonReference := Outputs.fOutputVelocity * 1/2*(Parameters.stStateVariables.fTime*Parameters.stStateVariables.fTime);]]></ST>
+    </Implementation>
+    <LineIds Name="FB_ManualControl">
+      <LineId Id="43" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="50" Count="2" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="28" Count="3" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="39" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

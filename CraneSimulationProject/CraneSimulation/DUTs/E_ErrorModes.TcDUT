@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <DUT Name="E_ErrorModes" Id="{b2c5bf7c-0234-4073-b897-8c662fa56beb}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_ErrorModes :
+(
+	NaN,
+	MaxLimit,
+	MinLimit
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -23,7 +23,13 @@
     <Compile Include="DUTs\E_CraneStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\E_ErrorModes.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_CraneKinematics.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_CraneParameters.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_PistonOutOfBounds.TcDUT">
@@ -32,7 +38,7 @@
     <Compile Include="DUTs\ST_PistonRange.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\ST_RelativeMovement.TcDUT">
+    <Compile Include="DUTs\ST_StateVariables.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
@@ -60,13 +66,25 @@
     <Compile Include="POUs\CraneSimulation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Function blocks\FB_AutomaticControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function blocks\FB_CheckPistonPosition.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Function blocks\FB_CraneMode.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Function blocks\FB_CraneStatus.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Function blocks\FB_ManualControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Function blocks\FB_MotionReferenceGenerator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function blocks\FB_OpenLoopControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Functions\F_BarToPascal.TcPOU">
@@ -93,7 +111,7 @@
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="VISUs\CraneHMI.TcVIS">
+    <Compile Include="VISUs\CraneSimulationHMI.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
@@ -101,7 +119,6 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
-    <Folder Include="CraneControl" />
     <Folder Include="POUs\Function blocks" />
     <Folder Include="POUs\Functions" />
     <Folder Include="VISUs" />

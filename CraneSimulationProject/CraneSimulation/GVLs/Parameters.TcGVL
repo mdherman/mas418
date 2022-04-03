@@ -8,6 +8,9 @@ VAR_GLOBAL
 	stPistonRange : ST_PistonRange;
 	stPistonOutOfBounds : ST_PistonOutOfBounds;
 	stCraneKinematics : ST_CraneKinematics;
+	stStateVariables : ST_StateVariables;
+	stCraneParameters : ST_CraneParameters;
+	eErrorModes : E_ErrorModes;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

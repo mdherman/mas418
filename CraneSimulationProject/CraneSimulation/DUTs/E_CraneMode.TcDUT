@@ -6,8 +6,9 @@
 TYPE E_CraneMode :
 (
 	Manual,
-	Automatic
-) INT;
+	Automatic,
+	NaN
+);
 END_TYPE
 ]]></Declaration>
   </DUT>

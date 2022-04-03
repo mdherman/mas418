@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_AutomaticControl" Id="{64696064-021d-4e51-bf2c-8162c27d0f9f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AutomaticControl
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbMotionReferenceGenerator : FB_MotionReferenceGenerator;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbMotionReferenceGenerator(
+	bEnable := TRUE,
+	fStartPosition_m := 0.0,
+	fStartVelocity_m := 0.0,
+	fPositionSetpoint_m := 0.4,
+	fVelocitySetpoint_m := 0.05,
+	fTimeBeforeStarting_s := 2,
+	fRampTime_s := 1,
+	fHoldPositionTime_s := 3,
+	fClock_s := Parameters.stStateVariables.fTime, 
+	fVelocityReference_m => Outputs.fOutputVelocity,
+	fPositionReference_m => HMI.fCylinderPositonReference
+);]]></ST>
+    </Implementation>
+    <LineIds Name="FB_AutomaticControl">
+      <LineId Id="10" Count="11" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

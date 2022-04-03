@@ -3,7 +3,12 @@
   <GVL Name="Inputs" Id="{e951088c-709d-404f-bb3e-4c135570158d}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	fManualCylinderPositionReference : LREAL;
+	bOnSelector : BOOL;
+	bAutoSelector : BOOL;
+	bStartButton : BOOL;
+	bStopButton : BOOL;
+	fJoystickX : LREAL;
+	fJoystickY : LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

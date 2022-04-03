@@ -5,54 +5,56 @@
 VAR_INPUT
 	bRunning : BOOL := FALSE; 
 	bMode : BOOL := FALSE; //False for manual, true for automatic.
-	fTime : LREAL;
 END_VAR
 VAR_OUTPUT
 	eCraneMode : E_CraneMode := E_CraneMode.Manual;
 END_VAR
 VAR
-	fbMotionReferenceGenerator : FB_MotionReferenceGenerator;
+	fbManualControl : FB_ManualControl;
+	fbAutomaticControl : FB_AutomaticControl;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[CASE eCraneMode OF
 	E_CraneMode.Manual:
 		IF bMode THEN
+			Parameters.stStateVariables.fTime := 0.0;
 			eCraneMode := E_CraneMode.Automatic;
 		ELSE
-			HMI.fCylinderPositonReference := Inputs.fManualCylinderPositionReference;
+			fbManualControl();
 		END_IF
 		
 	E_CraneMode.Automatic:
 		IF NOT bMode THEN
+			Parameters.stStateVariables.fTime := 0.0;
 			eCraneMode := E_CraneMode.Manual;
 		ELSE
-			fbMotionReferenceGenerator(
-				bEnable := TRUE,
-				fStartPosition_m := 0.0,
-				fStartVelocity_m := 0.0,
-				fPositionSetpoint_m := 0.4,
-				fVelocitySetpoint_m := 0.05,
-				fTimeBeforeStarting_s := 2,
-				fRampTime_s := 1,
-				fHoldPositionTime_s := 3,
-				fClock_s := fTime, 
-				fVelocityReference_m => HMI.fCylinderVelocityReference,
-				fPositionReference_m => HMI.fCylinderPositonReference
-			);
+			fbAutomaticControl();
+		END_IF
+		
+	E_CraneMode.NaN:
+		IF NOT bMode AND bRunning THEN
+			eCraneMode := E_CraneMode.Manual;
+		ELSIF bMode AND bRunning THEN
+			eCraneMode := E_CraneMode.Automatic;
 		END_IF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="FB_CraneMode">
       <LineId Id="10" Count="1" />
-      <LineId Id="20" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="90" Count="0" />
       <LineId Id="23" Count="1" />
       <LineId Id="22" Count="0" />
       <LineId Id="12" Count="1" />
-      <LineId Id="25" Count="2" />
-      <LineId Id="38" Count="11" />
-      <LineId Id="14" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="64" Count="0" />
       <LineId Id="16" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="78" Count="5" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>
