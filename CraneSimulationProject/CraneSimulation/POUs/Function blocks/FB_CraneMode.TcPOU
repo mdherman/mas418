@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_CraneMode" Id="{5a873a52-aee4-497c-94c4-37f709b5caa5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CraneMode
+VAR_INPUT
+	bRunning : BOOL := FALSE; 
+	bMode : BOOL := FALSE; //False for manual, true for automatic.
+	fTime : LREAL;
+END_VAR
+VAR_OUTPUT
+	eCraneMode : E_CraneMode := E_CraneMode.Manual;
+END_VAR
+VAR
+	fbMotionReferenceGenerator : FB_MotionReferenceGenerator;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE eCraneMode OF
+	E_CraneMode.Manual:
+		IF bMode THEN
+			eCraneMode := E_CraneMode.Automatic;
+		ELSE
+			HMI.fCylinderPositonReference := Inputs.fManualCylinderPositionReference;
+		END_IF
+		
+	E_CraneMode.Automatic:
+		IF NOT bMode THEN
+			eCraneMode := E_CraneMode.Manual;
+		ELSE
+			fbMotionReferenceGenerator(
+				bEnable := TRUE,
+				fStartPosition_m := 0.0,
+				fStartVelocity_m := 0.0,
+				fPositionSetpoint_m := 0.4,
+				fVelocitySetpoint_m := 0.05,
+				fTimeBeforeStarting_s := 2,
+				fRampTime_s := 1,
+				fHoldPositionTime_s := 3,
+				fClock_s := fTime, 
+				fVelocityReference_m => HMI.fCylinderVelocityReference,
+				fPositionReference_m => HMI.fCylinderPositonReference
+			);
+		END_IF
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="FB_CraneMode">
+      <LineId Id="10" Count="1" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="25" Count="2" />
+      <LineId Id="38" Count="11" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

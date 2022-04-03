@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <DUT Name="ST_PistonRange" Id="{2ff82653-f802-433f-9d13-ab0873d2b7c8}">
+    <Declaration><![CDATA[TYPE ST_PistonRange :
+STRUCT
+	fPistonPosMax : REAL := 0.5;
+	fPistonPosMin : REAL := 0.0;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

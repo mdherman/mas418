@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="F_BarToPascal" Id="{587ec4da-2a67-498f-936b-937080727254}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_BarToPascal : LREAL
+VAR_INPUT
+	fBar : LREAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_BarToPascal := fBar*1E5;]]></ST>
+    </Implementation>
+    <LineIds Name="F_BarToPascal">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

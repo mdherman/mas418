@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="F_LminToSI" Id="{94d741d9-9c67-46ea-969d-523fa1c7f352}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_LminToSI : LREAL
+VAR_INPUT
+	fLmin : LREAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_LminToSI := fLmin / 60000;]]></ST>
+    </Implementation>
+    <LineIds Name="F_LminToSI">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

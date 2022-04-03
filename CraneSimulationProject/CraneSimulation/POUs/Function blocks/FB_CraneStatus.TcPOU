@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_CraneStatus" Id="{329bc91d-7383-4ae4-a297-132803e3e6a7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CraneStatus
+VAR_INPUT
+	bPower : BOOL;
+	bStart : BOOL;
+	bStop : BOOL;
+	bRunning : BOOL;
+	bError : BOOL;
+END_VAR
+VAR_OUTPUT
+	eCraneStatus : E_CraneStatus := E_CraneStatus.PowerOff;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Status state machine
+CASE eCraneStatus OF
+	E_CraneStatus.PowerOff:
+		IF bPower THEN
+			eCraneStatus := E_CraneStatus.Checking;
+		END_IF	
+	
+	E_CraneStatus.Error:
+		IF NOT bError THEN
+			eCraneStatus := E_CraneStatus.Checking;
+		END_IF
+		
+	E_CraneStatus.Checking:
+		IF (NOT bError) THEN
+			eCraneStatus := E_CraneStatus.Ready;
+		ELSE
+			eCraneStatus := E_CraneStatus.Error;
+		END_IF
+		
+		IF bPower AND NOT bError THEN
+			eCraneStatus := E_CraneStatus.Ready;
+		ELSE
+			eCraneStatus := E_CraneStatus.PowerOff;
+		END_IF
+		
+	E_CraneStatus.Ready:
+		IF bStart AND bPower AND NOT(bError) THEN
+			HMI.bRunning := TRUE;
+			eCraneStatus := E_CraneStatus.Running;
+		END_IF	
+		
+		IF  NOT(bPower) OR bError THEN
+			eCraneStatus := E_CraneStatus.Checking;
+		END_IF	
+		
+	E_CraneStatus.Running:
+		eCraneStatus := F_CheckPistonPosition();
+		IF bStop THEN
+			eCraneStatus := E_CraneStatus.Stopping;
+		END_IF
+		
+		IF bError OR NOT bRunning OR NOT bPOWER THEN
+			eCraneStatus := E_CraneStatus.Checking;
+		END_IF
+		
+	E_CraneStatus.Stopping:
+		HMI.bRunning := FALSE;
+		HMI.bStart := FALSE;
+	
+		IF NOT bRunning OR bPower OR bError THEN
+			eCraneStatus := E_CraneStatus.Checking;
+		END_IF
+		
+	ELSE
+		eCraneStatus := E_CraneStatus.Checking;
+		
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="FB_CraneStatus">
+      <LineId Id="28" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="51" Count="2" />
+      <LineId Id="49" Count="1" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="66" Count="2" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="44" Count="4" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="56" Count="2" />
+      <LineId Id="60" Count="3" />
+      <LineId Id="72" Count="1" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="74" Count="2" />
+      <LineId Id="69" Count="2" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

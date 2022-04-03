@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <DUT Name="ST_PistonOutOfBounds" Id="{a9526d96-48b5-4e78-b1f1-0b5761af1113}">
+    <Declaration><![CDATA[TYPE ST_PistonOutOfBounds :
+STRUCT
+	sNotActive : STRING := 'End Stop not active';
+	sPistonMax : STRING := 'Piston has reached upper end stop';
+	sPistonMin : STRING := 'Piston has reached lower end stop';
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

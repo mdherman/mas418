@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="F_CheckPistonPosition" Id="{6f408e8f-58a0-4a52-a52a-6c9eb15374a1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_CheckPistonPosition : E_CraneStatus
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Check if piston is out of bounds
+IF HMI.fCylinderPositonReference > Parameters.stPistonRange.fPistonPosMax THEN
+	HMI.fCylinderPositonReference := Parameters.stPistonRange.fPistonPosMax;	
+	HMI.sPistonEndStopMessage := Parameters.stPistonOutOfBounds.sPistonMax;
+	F_CheckPistonPosition := E_CraneStatus.Error;
+	HMI.sPistonEndStopMessage := Parameters.stPistonOutOfBounds.sPistonMax;
+ELSIF HMI.fCylinderPositonReference < Parameters.stPistonRange.fPistonPosMin  THEN
+	HMI.fCylinderPositonReference := Parameters.stPistonRange.fPistonPosMin;
+	F_CheckPistonPosition := E_CraneStatus.Error;
+	HMI.sPistonEndStopMessage := Parameters.stPistonOutOfBounds.sPistonMin;
+ELSE
+	HMI.sPistonEndStopMessage := Parameters.stPistonOutOfBounds.sNotActive;
+	F_CheckPistonPosition := E_CraneStatus.Running;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="F_CheckPistonPosition">
+      <LineId Id="13" Count="12" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
