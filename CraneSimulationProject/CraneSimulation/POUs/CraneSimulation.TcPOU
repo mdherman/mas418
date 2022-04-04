@@ -26,9 +26,11 @@ IF Parameters.stStateVariables.bRunning THEN
 					eCraneMode => Outputs.eCraneMode);
 END_IF
 	
-// Calculate boom angle for visualization of simulation		
-HMI.fBoomAngle := F_BoomAngle(	fCylinderX := HMI.fCylinderPositonReference);
-
+// Calculate boom angle for visualization of simulation
+IF HMI.fCylinderPositon <= Parameters.stPistonRange.fPistonPosMax AND HMI.fCylinderPositon >= Parameters.stPistonRange.fPistonPosMin THEN
+	HMI.fBoomAngle := F_BoomAngle(	fCylinderX := HMI.fCylinderPositon);
+END_IF
+	
 // Simulation timer			
 IF Parameters.stStateVariables.bRunning THEN
 	Parameters.stStateVariables.fTime := Parameters.stStateVariables.fTime + fCyclicTime;
@@ -50,8 +52,9 @@ END_IF]]></ST>
       <LineId Id="263" Count="0" />
       <LineId Id="259" Count="0" />
       <LineId Id="274" Count="0" />
+      <LineId Id="284" Count="0" />
       <LineId Id="261" Count="0" />
-      <LineId Id="257" Count="0" />
+      <LineId Id="286" Count="1" />
       <LineId Id="224" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="7" Count="0" />

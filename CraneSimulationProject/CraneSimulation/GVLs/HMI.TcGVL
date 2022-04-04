@@ -5,8 +5,8 @@
 VAR_GLOBAL
 	fManualCylinderPositionReference : LREAL;
 	sPistonEndStopMessage : STRING;
-	fCylinderPositonReference : LREAL := 0.0;
-	fCylinderVelocityReference : LREAL := 0.0;
+	fCylinderPositon : LREAL := 0.0;
+	fCylinderVelocity : LREAL := 0.0;
 	fBoomAngle : LREAL;
 END_VAR]]></Declaration>
   </GVL>

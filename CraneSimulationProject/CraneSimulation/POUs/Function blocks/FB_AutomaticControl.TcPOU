@@ -21,8 +21,8 @@ END_VAR
 	fRampTime_s := 1,
 	fHoldPositionTime_s := 3,
 	fClock_s := Parameters.stStateVariables.fTime, 
-	fVelocityReference_m => Outputs.fOutputVelocity,
-	fPositionReference_m => HMI.fCylinderPositonReference
+	fVelocityReference_m => HMI.fCylinderVelocity,
+	fPositionReference_m => HMI.fCylinderPositon
 );]]></ST>
     </Implementation>
     <LineIds Name="FB_AutomaticControl">

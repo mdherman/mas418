@@ -7,7 +7,7 @@ VAR_GLOBAL
 	bStopLight : BOOL;
 	eCraneMode : E_CraneMode;
 	eCraneStatus : E_CraneStatus;
-	fOutputVelocity : LREAL;
+	fNormalizedOutput : LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

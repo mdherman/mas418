@@ -9,28 +9,22 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Check if piston is out of bounds
-IF HMI.fCylinderPositonReference > Parameters.stPistonRange.fPistonPosMax THEN
-	HMI.fCylinderPositonReference := Parameters.stPistonRange.fPistonPosMax;	
+IF HMI.fCylinderPositon > Parameters.stPistonRange.fPistonPosMax THEN
+	HMI.fCylinderPositon := Parameters.stPistonRange.fPistonPosMax;	
 	HMI.sPistonEndStopMessage := Parameters.stPistonOutOfBounds.sPistonMax;
 	Parameters.eErrorModes := E_ErrorModes.MaxLimit;
 	HMI.sPistonEndStopMessage := Parameters.stPistonOutOfBounds.sPistonMax;
-	Parameters.stStateVariables.fTime := 0.0;
-ELSIF HMI.fCylinderPositonReference < Parameters.stPistonRange.fPistonPosMin  THEN
-	HMI.fCylinderPositonReference := Parameters.stPistonRange.fPistonPosMin;
+ELSIF HMI.fCylinderPositon < Parameters.stPistonRange.fPistonPosMin  THEN
+	HMI.fCylinderPositon := Parameters.stPistonRange.fPistonPosMin;
 	Parameters.eErrorModes := E_ErrorModes.MinLimit;
 	HMI.sPistonEndStopMessage := Parameters.stPistonOutOfBounds.sPistonMin;
-	Parameters.stStateVariables.fTime := 0.0;
 ELSE
 	HMI.sPistonEndStopMessage := Parameters.stPistonOutOfBounds.sNotActive;
 	Parameters.eErrorModes := E_ErrorModes.NaN;
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="F_CheckPistonPosition">
-      <LineId Id="13" Count="5" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="19" Count="3" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="23" Count="1" />
+      <LineId Id="13" Count="11" />
       <LineId Id="31" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>

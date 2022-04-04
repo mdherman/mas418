@@ -32,10 +32,11 @@ fbOpenLoopControl(
 	stParam := Parameters.stCraneParameters,
 	fInput_ms := fNormalizedJoystickY,
 	fMaxValveFlow_lmin := Parameters.stCraneParameters.fMaxFlowCapacity,
-	fNormalizedOutput => Outputs.fOutputVelocity
+	fNormalizedOutput => Outputs.fNormalizedOutput
 );
 
-HMI.fCylinderPositonReference := Outputs.fOutputVelocity * 1/2*(Parameters.stStateVariables.fTime*Parameters.stStateVariables.fTime);]]></ST>
+HMI.fCylinderPositon := Outputs.fNormalizedOutput;
+]]></ST>
     </Implementation>
     <LineIds Name="FB_ManualControl">
       <LineId Id="43" Count="0" />
@@ -53,6 +54,7 @@ HMI.fCylinderPositonReference := Outputs.fOutputVelocity * 1/2*(Parameters.stSta
       <LineId Id="18" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="39" Count="0" />
+      <LineId Id="68" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
